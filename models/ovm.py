@@ -1,4 +1,3 @@
-from typing import Union
 import numpy as np
 from dataclasses import dataclass
 
@@ -97,9 +96,9 @@ class OVM(OVMParameters):
         h = self.dt
 
         k1 = self.acceleration(dx, v)
-        approx = v + k1 * h / 2
+        approx = v + k1 * h * 0.5
         k2 = self.acceleration(dx, approx)
-        approx = v + k2 * h / 2
+        approx = v + k2 * h * 0.5
         k3 = self.acceleration(dx, approx)
         approx = v + k3 * h
         k4 = self.acceleration(dx, approx)
