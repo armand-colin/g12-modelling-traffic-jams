@@ -4,12 +4,29 @@ import sys
 import numpy as np
 
 class TestRunner:
-
+    """Class for running tests on a IDM.
+    
+    The test runner is initialized with a model and a general parameters object. You then
+    call the method run(), which lets you run the model multiple times, but with a varying
+    value for a given parameter.
+    """
     def __init__(self, model: IDM, parameters: IDMParameters):
         self.model = model
         self.parameters = parameters
 
     def run(self, parameter: str, value_range: List[float], jam_threshold: float, verbose=True):
+        """Runs the model multiple times for each given value, then returns the time and time to jam numpy arrays.
+        
+        parameter: 
+            name of the parameter to vary. Can be for example "a_max" for the maximum acceleration, or "v_max" for the
+            maximum velocuty.
+        value_range:
+            range of values of which to set the parameter. The model will be run once for each value of this parameter
+        jam_threshold: 
+            jam threshold to estimate time to jam
+        verbose:
+            boolean, to print the current progress or not.
+        """
         data = []
 
         for i in range(len(value_range)):
